@@ -5,4 +5,4 @@ resources:
   - cert-manager.yaml
   - ingress-nginx.yaml
   - sealed-secrets.yaml
-  - ./rancher
+  - rancher.yaml
