@@ -32,4 +32,8 @@ spec:
     ingress:
       enabled: true
       ingressClassName: nginx       
-    bootstrapPassword: "admin"
+    bootstrapPassword: 
+      valueFrom:
+        secretKeyRef:
+          name: rancher-bootstrap-password
+          key: bootstrapPassword
