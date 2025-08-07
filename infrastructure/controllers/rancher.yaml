@@ -32,4 +32,4 @@ spec:
     ingress:
       enabled: true
       ingressClassName: nginx       
-    bootstrapPassword: "admin"
+    bootstrapPassword: admin
