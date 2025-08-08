@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - cluster-issuers.yaml
   - metallb-pool.yaml
+  - rancher-ingress.yaml
