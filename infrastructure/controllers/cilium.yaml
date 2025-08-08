@@ -29,12 +29,13 @@ spec:
     remediation:
       retries: 3
   values:
-    kubeProxyReplacement: "strict"
+    kubeProxyReplacement: true
+    tunnel: vxlan
     k8sServiceHost: 127.0.0.1
     k8sServicePort: 6443
     loadBalancer:
       algorithm: maglev
-      mode: dsr
+      mode: snat
     ipam:
       mode: kubernetes
     bpf:
