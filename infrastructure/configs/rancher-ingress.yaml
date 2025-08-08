@@ -1,12 +1,10 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rancher
   namespace: cattle-system
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
 spec:
+  ingressClassName: nginx
   rules:
   - host: rancher.onmyputer.com
     http:
@@ -15,6 +13,10 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: rancher
+            name: cattle-system-rancher
             port:
               number: 80
+  tls:
+  - hosts:
+    - rancher.onmyputer.com
+    secretName: tls-rancher
