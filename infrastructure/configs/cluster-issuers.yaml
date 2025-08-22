@@ -11,8 +11,8 @@ spec:
       name: letsencrypt-dns-account-key
     solvers:
       - dns01:
-        cloudflare:
-          email: contact@onmyputer.com
-          apiTokenSecretRef:
-            name: cloudflare-api-token-secret
-            key: api-token
+          cloudflare:
+            email: contact@onmyputer.com
+            apiTokenSecretRef:
+              name: cloudflare-api-token-secret
+              key: api-token
