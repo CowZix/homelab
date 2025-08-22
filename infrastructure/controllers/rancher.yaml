@@ -27,9 +27,11 @@ spec:
     createNamespace: true
   targetNamespace: cattle-system
   values:
-    hostname: rancher.onmyputer.com  
+    hostname: rancher.onmyputer.com
     replicas: 1
     ingress:
       enabled: true
-      ingressClassName: nginx       
+      ingressClassName: nginx
+      tls:
+        source: letsEncrypt
     bootstrapPassword: admin

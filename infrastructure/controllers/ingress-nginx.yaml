@@ -21,6 +21,8 @@ metadata:
   name: ingress-nginx
   namespace: ingress-nginx
 spec:
+  install:
+    timeout: 10m
   interval: 30m
   chart:
     spec:
