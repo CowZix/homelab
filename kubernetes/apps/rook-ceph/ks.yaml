@@ -5,7 +5,7 @@ metadata:
   name: rook-ceph
 spec:
   interval: 1h
-  path: ./kubernetes/apps/rook-ceph/app
+  path: ./kubernetes/apps/rook-ceph
   postBuild:
     substituteFrom:
       - name: cluster-secrets
