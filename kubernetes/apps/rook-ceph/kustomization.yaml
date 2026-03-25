@@ -5,5 +5,5 @@ namespace: rook-ceph
 
 resources:
   - ./namespace.yaml
-  - ./app/helmrelease.yaml
   - ./app/ocirepository.yaml
+  - ./app/helmrelease.yaml
