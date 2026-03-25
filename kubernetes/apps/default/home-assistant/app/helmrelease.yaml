@@ -66,8 +66,7 @@ spec:
                 port: *port
     persistence:
       data:
-        storageClass: rook-ceph-block
-        size: 32Gi
-        accessMode: ReadWriteOnce
+        type: hostPath
+        hostPath: /var/lib/home-assistant
         globalMounts:
           - path: /config
