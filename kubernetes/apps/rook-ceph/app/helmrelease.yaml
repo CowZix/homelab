@@ -4,9 +4,13 @@ kind: HelmRelease
 metadata:
   name: rook-ceph
 spec:
-  chartRef:
-    kind: OCIRepository
-    name: rook-ceph
+  chart:
+    spec:
+      chart: rook-ceph
+      sourceRef:
+        kind: HelmRepository
+        name: rook-ceph
+      version: "1.14.1"
   interval: 1h
   values:
     cephClusterSpec:
