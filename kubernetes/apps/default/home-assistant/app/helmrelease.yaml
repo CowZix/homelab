@@ -66,8 +66,8 @@ spec:
                 port: *port
     persistence:
       data:
+        storageClass: rook-ceph-block
         size: 32Gi
-        storageClass: local-path
         accessMode: ReadWriteOnce
         globalMounts:
           - path: /config
