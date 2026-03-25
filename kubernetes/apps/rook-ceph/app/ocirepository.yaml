@@ -5,9 +5,6 @@ metadata:
   name: rook-ceph
 spec:
   interval: 15m
-  layerSelector:
-    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
-    operation: copy
+  url: oci://registry.rook.io/rook/helm-charts
   ref:
     tag: v1.14.1
-  url: oci://ghcr.io/bjw-s-labs/helm/rook-ceph
