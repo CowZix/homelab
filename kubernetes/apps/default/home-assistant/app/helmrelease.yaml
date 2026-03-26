@@ -11,6 +11,7 @@ spec:
   values:
     controllers:
       home-assistant:
+        replicas: 1
         strategy: RollingUpdate
         containers:
           app:
