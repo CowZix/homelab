@@ -1,26 +1,26 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: home-assistant
+  name: ollama
 spec:
   chartRef:
     kind: OCIRepository
-    name: home-assistant
+    name: ollama
   interval: 1h
   values:
     controllers:
-      home-assistant:
+      ollama:
         replicas: 1
         strategy: RollingUpdate
         containers:
           app:
             image:
-              repository: ghcr.io/home-assistant/home-assistant
+              repository: ollama/ollama
               tag: latest
             env:
-              HTTP_PORT: &port 8123
-              TZ: EST
+              OLLAMA_HOST: 0.0.0.0
+              OLLAMA_PORT: &port 11434
+              TZ: UTC
             probes:
               liveness: &probes
                 enabled: true
@@ -31,7 +31,7 @@ spec:
                     port: *port
                   initialDelaySeconds: 30
                   periodSeconds: 10
-                  timeoutSeconds: 1
+                  timeoutSeconds: 2
                   failureThreshold: 3
               readiness: *probes
             securityContext:
@@ -40,23 +40,26 @@ spec:
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 50m
-                memory: 2Gi
-              limits:
                 cpu: 500m
-                memory: 4Gi
+                memory: 8Gi
+              limits:
+                cpu: 2
+                memory: 16Gi
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: false
         runAsUser: 0
+
     service:
       app:
         ports:
           http:
-            port: 8123
+            port: 11434
+
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        hostnames: ["ollama.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-internal
             namespace: network
@@ -65,9 +68,10 @@ spec:
           - backendRefs:
               - identifier: app
                 port: *port
+
     persistence:
       data:
         type: hostPath
-        hostPath: /var/lib/home-assistant
+        hostPath: /var/lib/ollama
         globalMounts:
-          - path: /config
+          - path: /root/.ollama
