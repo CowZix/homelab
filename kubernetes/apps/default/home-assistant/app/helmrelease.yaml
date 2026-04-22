@@ -12,7 +12,7 @@ spec:
     controllers:
       home-assistant:
         replicas: 1
-        strategy: RollingUpdate
+        strategy: Recreate
         containers:
           app:
             image:
@@ -20,7 +20,7 @@ spec:
               tag: latest
             env:
               HTTP_PORT: &port 8123
-              TZ: EST
+              TZ: UTC
             probes:
               liveness: &probes
                 enabled: true
