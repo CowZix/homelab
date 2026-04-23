@@ -11,9 +11,7 @@ spec:
     controllers:
       ollama:
         replicas: 1
-        strategy:
-          type: Recreate
-          rollingUpdate: null
+        strategy: Recreate
         containers:
           app:
             image:
