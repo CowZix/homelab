@@ -56,7 +56,7 @@ spec:
             port: 8123
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        hostnames: ["{{ .Release.Name }}.onmyputer.com"]
         parentRefs:
           - name: envoy-internal
             namespace: network
