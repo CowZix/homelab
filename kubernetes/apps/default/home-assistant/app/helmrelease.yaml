@@ -13,7 +13,6 @@ spec:
       home-assistant:
         replicas: 1
         strategy: Recreate
-        rollingUpdate: null
         containers:
           app:
             image:
