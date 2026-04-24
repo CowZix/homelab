@@ -71,7 +71,8 @@ spec:
 
     persistence:
       data:
-        type: existingClaim
-        existingClaim: ollama-data
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 20Gi
         globalMounts:
           - path: /root/.ollama
