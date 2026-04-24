@@ -11,3 +11,19 @@ spec:
   values:
     serviceMonitor:
       create: true
+    service:
+      app:
+        ports:
+          http:
+            port: 9080
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.onmyputer.com"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
