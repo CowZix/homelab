@@ -26,5 +26,5 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - identifier: app
-                port: *port
+              - name: flux-operator
+                port: http-web
