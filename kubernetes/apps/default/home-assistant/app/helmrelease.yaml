@@ -67,8 +67,7 @@ spec:
                 port: *port
     persistence:
       data:
-        type: persistentVolumeClaim
-        persistentVolumeClaim:
-          claimName: home-assistant-config
+        type: existingClaim
+        existingClaim: home-assistant-config
         globalMounts:
           - path: /config

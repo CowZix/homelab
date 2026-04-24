@@ -71,8 +71,7 @@ spec:
 
     persistence:
       data:
-        type: persistentVolumeClaim
-        persistentVolumeClaim:
-          claimName: ollama-data
+        type: existingClaim
+        existingClaim: ollama-data
         globalMounts:
           - path: /root/.ollama
