@@ -11,20 +11,13 @@ spec:
   values:
     serviceMonitor:
       create: true
-    service:
-      app:
-        ports:
-          http:
-            port: &port 9080
-            targetPort: http-web
-    route:
-      app:
-        hostnames: ["{{ .Release.Name }}.onmyputer.com"]
+    web:
+      enabled: true
+      httpRoute:
+        enabled: true
         parentRefs:
           - name: envoy-internal
             namespace: network
             sectionName: https
-        rules:
-          - backendRefs:
-              - name: flux-operator
-                port: http-web
+        hostnames:
+          - ["{{ .Release.Name }}.onmyputer.com"]
