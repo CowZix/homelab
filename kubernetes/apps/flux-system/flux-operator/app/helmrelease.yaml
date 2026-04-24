@@ -16,6 +16,7 @@ spec:
         ports:
           http:
             port: &port 9080
+            targetPort: http-web
     route:
       app:
         hostnames: ["{{ .Release.Name }}.onmyputer.com"]
