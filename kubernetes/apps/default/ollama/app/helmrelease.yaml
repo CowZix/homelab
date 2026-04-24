@@ -59,7 +59,7 @@ spec:
 
     route:
       app:
-        hostnames: "ollama.onmyputer.com"
+        hostnames: ["ollama.onmyputer.com"]
         parentRefs:
           - name: envoy-internal
             namespace: network
