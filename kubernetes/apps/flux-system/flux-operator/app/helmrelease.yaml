@@ -20,4 +20,4 @@ spec:
             namespace: network
             sectionName: https
         hostnames:
-          - "{{ .Release.Name }}.onmyputer.com"
+          - "flux-operator.onmyputer.com"

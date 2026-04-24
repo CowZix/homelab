@@ -60,7 +60,7 @@ spec:
           - port: http
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.onmyputer.com"]
+        hostnames: "echo.onmyputer.com"
         parentRefs:
           - name: envoy-external
             namespace: network

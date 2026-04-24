@@ -59,7 +59,7 @@ spec:
 
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.onmyputer.com"]
+        hostnames: "ollama.onmyputer.com"
         parentRefs:
           - name: envoy-internal
             namespace: network
