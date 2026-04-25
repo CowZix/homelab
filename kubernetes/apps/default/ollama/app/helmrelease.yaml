@@ -71,8 +71,7 @@ spec:
 
     persistence:
       data:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 20Gi
+        type: hostPath
+        hostPath: /var/lib/ollama
         globalMounts:
           - path: /root/.ollama

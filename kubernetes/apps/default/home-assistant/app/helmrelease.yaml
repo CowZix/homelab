@@ -67,7 +67,7 @@ spec:
                 port: *port
     persistence:
       data:
-        type: existingClaim
-        existingClaim: home-assistant-config
+        type: hostPath
+        hostPath: /var/lib/home-assistant
         globalMounts:
           - path: /config
