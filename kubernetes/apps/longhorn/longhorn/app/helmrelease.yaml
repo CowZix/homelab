@@ -1,0 +1,62 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: longhorn
+  targetNamespace: longhorn-system
+  install:
+    createNamespace: true
+  upgrade:
+    remediation:
+      retries: 3
+
+  values:
+    defaultSettings:
+      defaultDataPath: /var/lib/longhorn
+      defaultReplicaCount: 3
+      storageMinimalAvailablePercentage: 15
+      storageOverProvisioningPercentage: 100
+      createDefaultDiskLabeledNodes: true
+      defaultDataLocality: best-effort
+      replicaSoftAntiAffinity: true
+      replicaAutoBalance: best-effort
+      guaranteedInstanceManagerCPU: 15
+      backupTarget: ""
+      backupTargetCredentialSecret: ""
+
+    persistence:
+      defaultClass: true
+      defaultFsType: ext4
+      defaultClassReplicaCount: 3
+      reclaimPolicy: Delete
+
+    longhornUI:
+      replicas: 1
+
+    ingress:
+      enabled: false
+
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    httproute:
+      enabled: true
+      parentRefs:
+          - name: envoy-external
+            namespace: network
+            sectionName: https
+      hostnames: ["longhorn.onmyputer.com"]
+    csi:
+      attacherReplicaCount: 2
+      provisionerReplicaCount: 2
+      resizerReplicaCount: 2
+      snapshotterReplicaCount: 2
