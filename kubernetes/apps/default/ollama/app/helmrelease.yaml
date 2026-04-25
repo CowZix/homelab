@@ -71,7 +71,7 @@ spec:
 
     persistence:
       data:
-        type: hostPath
-        hostPath: /var/lib/ollama
+        type: persistentVolumeClaim
+        existingClaim: ollama-data
         globalMounts:
           - path: /root/.ollama
