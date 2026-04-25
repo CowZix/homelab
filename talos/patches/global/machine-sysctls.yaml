@@ -14,3 +14,6 @@ machine:
     modules:
       - name: nvme_tcp
       - name: vfio_pci
+      - name: configfs
+      - name: nbd
+      - name: uio_pci_generic
