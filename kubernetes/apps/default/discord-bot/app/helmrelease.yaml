@@ -34,9 +34,9 @@ spec:
       securityContext:
         runAsNonRoot: false
         runAsUser: 0
-    persistence:
-      data:
-        type: persistentVolumeClaim
-        existingClaim: discord-bot-data
-        globalMounts:
-          - path: /app/src/discord_bot/database
+#    persistence:
+#      data:
+#        type: persistentVolumeClaim
+#        existingClaim: discord-bot-data
+#        globalMounts:
+#          - path: /app/src/discord_bot/database
