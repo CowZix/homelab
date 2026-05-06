@@ -16,7 +16,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/cowzix/discord-bot:latest
+              repository: ghcr.io/cowzix/discord-bot
               tag: latest
             env:
               TOKEN:
