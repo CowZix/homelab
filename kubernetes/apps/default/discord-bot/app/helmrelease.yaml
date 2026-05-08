@@ -23,8 +23,13 @@ spec:
               TOKEN:
                 valueFrom:
                   secretKeyRef:
-                    name: discord-bot-token
+                    name: discord-bot-secret
                     key: TOKEN
+              YOUTUBE:
+                valueFrom:
+                  secretKeyRef:
+                    name: discord-bot-secret
+                    key: YOUTUBE
               PREFIX: "glorp!"
             securityContext:
               allowPrivilegeEscalation: false
