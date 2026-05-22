@@ -30,13 +30,13 @@ spec:
                     path: /
                     port: *port
                   initialDelaySeconds: 30
-                  periodSeconds: 10
+                  periodSeconds: 10c
                   timeoutSeconds: 1
                   failureThreshold: 3
               readiness: *probes
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
