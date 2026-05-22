@@ -19,6 +19,10 @@ spec:
       tag: ""
     rbac:
       create: true
+      additionalRules:
+        - apiGroups: [""]
+          resources: ["namespaces"]
+          verbs: ["get", "list", "watch"]
       helm: false
       secrets: false
       viewRBAC: false
