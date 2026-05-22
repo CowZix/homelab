@@ -33,7 +33,7 @@ spec:
       app:
         ports:
           http:
-            port: 11434
+            port: &port 9280
 
     route:
       app:
@@ -45,4 +45,4 @@ spec:
         rules:
           - backendRefs:
               - identifier: app
-                port: *port
+                port: 9280
