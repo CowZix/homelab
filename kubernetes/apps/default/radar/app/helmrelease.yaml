@@ -21,6 +21,33 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+            rbac:
+              create: true
+              helm: false
+              secrets: false
+              viewRBAC: false
+              podExec: false
+              podLogs: true
+              portForward: false
+              selfUpgrade: false
+              traffic:
+                hubble: true
+              crdGroups:
+                argo: true
+                certManager: true
+                contour: true
+                crossplane: true
+                externalSecrets: true
+                flux: true
+                gatewayApi: true
+                istio: true
+                karpenter: true
+                keda: true
+                knative: true
+                kyverno: true
+                prometheus: true
+                traefik: true
+                verticalPodAutoscaler: true
 
     defaultPodOptions:
       securityContext:
