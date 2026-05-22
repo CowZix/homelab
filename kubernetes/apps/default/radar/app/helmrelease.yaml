@@ -1,0 +1,84 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: radar
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: radar
+  interval: 1h
+  values:
+    controllers:
+      radar:
+        replicas: 1
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: ghcr.io/skyhook-io/radar
+              tag: latest
+              pullPolicy: IfNotPresent
+            env:
+              PGID: "1000"
+              PUID: "1000"
+              TZ: UTC
+            ports:
+              - name: http
+                containerPort: 5000
+                protocol: TCP
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 5000
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 5000
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+    service:
+      app:
+        controller: radar
+        ports:
+          http:
+            port: 5000
+            protocol: TCP
+            targetPort: 5000
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 1000
+        fsGroup: 1000
+    persistence:
+      data:
+        type: persistentVolumeClaim
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        globalMounts:
+          - path: /data

@@ -12,3 +12,4 @@ resources:
   - ./home-assistant/ks.yaml
   - ./ollama/ks.yaml
   - ./discord-bot/ks.yaml
+  - ./radar/ks.yaml
