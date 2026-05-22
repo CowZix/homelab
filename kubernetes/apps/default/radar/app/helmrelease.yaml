@@ -30,8 +30,7 @@ spec:
       podLogs: true
       portForward: false
       selfUpgrade: false
-      traffic:
-        hubble: true
+      traffic: true
       crdGroups:
         argo: true
         certManager: true
