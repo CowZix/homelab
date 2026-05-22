@@ -3,24 +3,20 @@ kind: HelmRelease
 metadata:
   name: radar
 spec:
-  chartRef:
-    kind: OCIRepository
-    name: radar
+  chart:
+    spec:
+      chart: radar
+      sourceRef:
+        kind: HelmRepository
+        name: skyhook
+        namespace: flux-system
   interval: 1h
   values:
-    controllers:
-      radar:
-        replicas: 1
-        strategy: RollingUpdate
-        containers:
-          app:
-            image:
-              repository: ghcr.io/skyhook-io/radar
-              tag: latest
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+    replicaCount: 1
+    image:
+      repository: ghcr.io/skyhook-io/radar
+      pullPolicy: IfNotPresent
+      tag: ""
     rbac:
       create: true
       helm: false
@@ -48,19 +44,22 @@ spec:
         prometheus: true
         traefik: true
         verticalPodAutoscaler: true
-
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 65532
+      runAsGroup: 65532
+      fsGroup: 65532
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 65532
+      capabilities:
+        drop:
+          - ALL
     service:
-      app:
-        ports:
-          http:
-            port: &port 9280
+      type: ClusterIP
+      port: 9280
 
     route:
       app:
