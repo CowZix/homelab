@@ -46,6 +46,14 @@
       minimumGroupSize: 3,
     },
     {
+      description: "Auto-merge minor and patch updates",
+      matchUpdateTypes: ["minor", "patch"],
+      automerge: true,
+      automergeType: "branch",
+      minimumReleaseAge: "3 days",
+      ignoreTests: true,
+    },
+    {
       description: "Auto-merge GitHub Actions",
       matchManagers: ["github-actions"],
       automerge: true,
